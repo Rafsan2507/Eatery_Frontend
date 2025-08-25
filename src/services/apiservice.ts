@@ -33,7 +33,10 @@ type LogInUser = {
 
 export const signUp = async (data: SignUpUser): Promise<{ token: string }> => {
   try {
-    const response = await axios.post(`http://localhost:5000/signup`, data);
+    const response = await axios.post(
+      `https://eatery-backend.vercel.app/signup`,
+      data
+    );
     return response.data;
   } catch (error) {
     console.error("Error signing up:", error);
@@ -43,7 +46,10 @@ export const signUp = async (data: SignUpUser): Promise<{ token: string }> => {
 
 export const logIn = async (data: LogInUser): Promise<{ token: string }> => {
   try {
-    const response = await axios.post(`http://localhost:5000/login`, data);
+    const response = await axios.post(
+      `https://eatery-backend.vercel.app/login`,
+      data
+    );
 
     return response.data;
   } catch (error) {
@@ -56,11 +62,14 @@ export const logIn = async (data: LogInUser): Promise<{ token: string }> => {
 
 export const loggedInuser = async (): Promise<LoggedInuser> => {
   try {
-    const response = await axios.get(`http://localhost:5000/user-data`, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
+    const response = await axios.get(
+      `https://eatery-backend.vercel.app/user-data`,
+      {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      }
+    );
 
     return response.data;
   } catch (error) {
