@@ -1,9 +1,9 @@
 import axios from "axios";
 import { getToken } from "../tokenServices";
-
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URI;
 const updateTable = async (tableData: {}) => {
   const response = await axios.put(
-    "http://localhost:5000/tablePOS/updateTable",
+    `${baseUrl}/tablePOS/updateTable`,
     tableData,
     {
       headers: {

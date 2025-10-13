@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { OrderHistory } from "./OrderHistorySlice";
 import { getToken } from "@/services/tokenServices";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URI;
 
 export interface IngredientsTable {
   _id?: string;
@@ -112,13 +113,11 @@ export const AddIngredientsSlice = createSlice({
 export const postOrder = createAsyncThunk(
   "ingredients/order",
   async (order: OrderHistory) => {
-    const response = await axios.post("http://localhost:5000/stock/new", order,
-      {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      }
-    );
+    const response = await axios.post(`${baseUrl}/stock/new`, order, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
     return response.data;
   }
 );
@@ -127,7 +126,7 @@ export const postAddIngredient = createAsyncThunk(
   "ingredient/add",
   async (addIngredient: AddIngredient) => {
     const response = await axios.post(
-      "http://localhost:5000/ingredient/addingredient",
+      `${baseUrl}/ingredient/addingredient`,
       addIngredient,
       {
         headers: {
@@ -149,7 +148,7 @@ export const getAllIngredients = createAsyncThunk(
     pageNumber: number;
   }): Promise<paginatedData> => {
     const response = await axios.get(
-      `http://localhost:5000/ingredient/allingredient?pageSize=${pageSize}&pageNumber=${pageNumber}`,
+      `${baseUrl}/ingredient/allingredient?pageSize=${pageSize}&pageNumber=${pageNumber}`,
       {
         headers: {
           Authorization: `Bearer ${getToken()}`,
@@ -164,7 +163,7 @@ export const deleteIngredient = createAsyncThunk(
   "inventory/deleteIngredient",
   async (id: string) => {
     const response = await axios.delete(
-      `http://localhost:5000/ingredient/delete-ingredient`,
+      `${baseUrl}/ingredient/delete-ingredient`,
       {
         data: { id },
         headers: {

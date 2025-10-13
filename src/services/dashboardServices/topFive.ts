@@ -1,15 +1,12 @@
 import axios from "axios";
 import { getToken } from "../tokenServices";
-
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URI;
 const topFive = async () => {
-  const response = await axios.get(
-    "http://localhost:5000/dashboardget/topFive",
-    {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    }
-  );
+  const response = await axios.get(`${baseUrl}/dashboardget/topFive`, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
   return response.data;
 };
 export default topFive;

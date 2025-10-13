@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { TableStatus } from "@/components/tableTryComponents/SideNavTry";
 import { getToken } from "@/services/tokenServices";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URI;
 export interface OrderDetails {
   _id?: string;
   tableNo?: number;
@@ -80,7 +81,7 @@ export const placeOrder = createAsyncThunk(
   "placeorder/placeOrder",
   async (orderDetails: OrderDetails) => {
     const response = await axios.post(
-      "http://localhost:5000/pos/new",
+      `${baseUrl}/pos/new`,
       {
         orderDetails,
       },
@@ -95,7 +96,7 @@ export const placeOrder = createAsyncThunk(
 );
 
 export const getmenuItems = createAsyncThunk("menu/menuItems", async () => {
-  const response = await axios.get("http://localhost:5000/menu/allmenu");
+  const response = await axios.get(`${baseUrl}/menu/allmenu`);
   return response.data;
 });
 

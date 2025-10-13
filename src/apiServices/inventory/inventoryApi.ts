@@ -1,5 +1,6 @@
 import { getToken } from "@/services/tokenServices";
 import axios from "axios";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URI;
 
 export const getAllWastageItems = async ({
   pageNumber,
@@ -9,7 +10,7 @@ export const getAllWastageItems = async ({
   pageSize: number;
 }) => {
   const response = await axios.get(
-    `http://localhost:5000/ingredient/expired-items?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+    `${baseUrl}/ingredient/expired-items?pageNumber=${pageNumber}&pageSize=${pageSize}`,
     {
       headers: {
         Authorization: `Bearer ${getToken()}`,

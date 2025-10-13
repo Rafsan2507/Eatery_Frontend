@@ -34,7 +34,7 @@ type LogInUser = {
 export const signUp = async (data: SignUpUser): Promise<{ token: string }> => {
   try {
     const response = await axios.post(
-      `https://eatery-backend.vercel.app/signup`,
+      `${baseUrl}/signup`,
       data
     );
     return response.data;
@@ -47,7 +47,7 @@ export const signUp = async (data: SignUpUser): Promise<{ token: string }> => {
 export const logIn = async (data: LogInUser): Promise<{ token: string }> => {
   try {
     const response = await axios.post(
-      `https://eatery-backend.vercel.app/login`,
+      `${baseUrl}/login`,
       data
     );
 
@@ -63,7 +63,7 @@ export const logIn = async (data: LogInUser): Promise<{ token: string }> => {
 export const loggedInuser = async (): Promise<LoggedInuser> => {
   try {
     const response = await axios.get(
-      `https://eatery-backend.vercel.app/user-data`,
+      `${baseUrl}/user-data`,
       {
         headers: {
           Authorization: `Bearer ${getToken()}`,

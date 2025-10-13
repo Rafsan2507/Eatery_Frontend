@@ -1,6 +1,7 @@
 import { getToken } from "@/services/tokenServices";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URI;
 
 export interface MenuItem {
   id: number;
@@ -68,7 +69,7 @@ export const MenuItemSlice = createSlice({
 });
 
 export const getmenuItems = createAsyncThunk("menu/getmenuItems", async () => {
-  const response = await axios.get("http://localhost:5000/menu/allmenu", {
+  const response = await axios.get(`${baseUrl}/menu/allmenu`, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
@@ -79,13 +80,11 @@ export const getmenuItems = createAsyncThunk("menu/getmenuItems", async () => {
 export const getTopSellingItems = createAsyncThunk(
   "menu/getTopSellingItemss",
   async () => {
-    const response = await axios.get("http://localhost:5000/pos/bestsell",
-      {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      }
-    );
+    const response = await axios.get(`${baseUrl}/pos/bestsell`, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
     return response.data;
   }
 );

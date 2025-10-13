@@ -2,6 +2,7 @@ import { getToken } from "@/services/tokenServices";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { headers } from "next/headers";
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URI;
 
 export interface MenuItem {
   _id: string;
@@ -86,7 +87,7 @@ export const uploadImage = createAsyncThunk(
     formData.append("image", file);
 
     const response = await axios.post(
-      "http://localhost:5000/imageUpload", // Use the correct port (5000 in this case)
+      `${baseUrl}/imageUpload`, // Use the correct port (5000 in this case)
       formData,
       {
         headers: {
@@ -102,21 +103,17 @@ export const uploadImage = createAsyncThunk(
 export const createMenuItem = createAsyncThunk(
   "menu/createMenuItem",
   async (newMenuItem: Omit<MenuItem, "_id">) => {
-    const response = await axios.post(
-      "http://localhost:5000/menu/addmenu",
-      newMenuItem,
-      {
-        headers: {
-          Authorization: `Bearer ${getToken()}`,
-        },
-      }
-    );
+    const response = await axios.post(`${baseUrl}/menu/addmenu`, newMenuItem, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
     return response.data;
   }
 );
 
 export const getmenuItems = createAsyncThunk("menu/menuItems", async () => {
-  const response = await axios.get("http://localhost:5000/menu/allmenu", {
+  const response = await axios.get(`${baseUrl}/menu/allmenu`, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
@@ -128,7 +125,7 @@ export const deleteMenuItem = createAsyncThunk(
   "menu/deleteMenuItem",
   async (_id: string) => {
     console.log("Sending DELETE request for item ID:", _id); // Log the ID being sent
-    await axios.delete(`http://localhost:5000/menu/items/${_id}`, {
+    await axios.delete(`${baseUrl}/menu/items/${_id}`, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
