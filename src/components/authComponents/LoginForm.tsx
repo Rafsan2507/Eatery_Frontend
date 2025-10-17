@@ -173,9 +173,9 @@ const LoginForm = ({}: Props) => {
                     borderRadius="6px"
                   >
                     <option value="Admin">Admin</option>
-                    <option value="POSManager">POS Manager</option>
+                    {/* <option value="POSManager">POS Manager</option>
                     <option value="MenuManager">Menu Manager</option>
-                    <option value="InventoryManager">Inventory Manager</option>
+                    <option value="InventoryManager">Inventory Manager</option> */}
                   </Select>
                 </FormControl>
 
