@@ -208,9 +208,9 @@ function SignUpForm({}: Props) {
                   borderRadius="6px"
                 >
                   <option value="Admin">Admin</option>
-                  <option value="POSManager">POS Manager</option>
+                  {/* <option value="POSManager">POS Manager</option>
                   <option value="MenuManager">Menu Manager</option>
-                  <option value="InventoryManager">Inventory Manager</option>
+                  <option value="InventoryManager">Inventory Manager</option> */}
                 </Select>
               </FormControl>
             </Stack>
@@ -290,7 +290,7 @@ function SignUpForm({}: Props) {
               color="black"
               size="md"
               w="full"
-              _hover={{ bg: "#547494" , color: "white"}}
+              _hover={{ bg: "#547494", color: "white" }}
               _active={{ bg: "#547494" }}
               mt="4"
             >
